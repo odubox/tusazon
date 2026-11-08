@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Sazón - El secreto de la buena cocina | Especias Artesanales Sin Sal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wood: {
+                            50: '#FAF5EF',
+                            100: '#F2E6D8',
+                            200: '#E4CCB0',
+                            600: '#8C5229',
+                            800: '#4A2A14',
+                            900: '#2C180A',
+                            950: '#1A0E06',
+                        },
+                        sazon: {
+                            gold: '#D4AF37',
+                            goldHover: '#B8952B',
+                            red: '#C82323',
+                            green: '#2D6A4F',
+                            darkGreen: '#1B4332'
+                        }
+                    },
+                    fontFamily: {
+                        title: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Texturas visuales y degradados personalizados */
+        .wood-texture {
+            background-color: #2C180A;
+            background-image: radial-gradient(circle at 50% 50%, rgba(74, 42, 20, 0.6) 0%, rgba(26, 14, 6, 0.95) 100%),
+                              linear-gradient(45deg, rgba(0,0,0,0.4) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.4) 75%),
+                              linear-gradient(45deg, rgba(0,0,0,0.4) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.4) 75%);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-position: 0 0, 0 0, 20px 20px;
+        }
+
+        .label-shape {
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 3px solid #000000;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(15, 8, 3, 0.75) 0%, rgba(44, 24, 10, 0.85) 60%, rgba(26, 14, 6, 1) 100%);
+        }
+
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+        }
+
+        .glass-card {
+            background: rgba(35, 20, 10, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-wood-950 text-wood-100 font-sans antialiased selection:bg-sazon-gold selection:text-wood-950">
+
+    <!-- Navegación Superior -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-card border-b border-wood-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Marca -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-t-xl rounded-b-none bg-sazon-red border-2 border-black flex items-center justify-center font-bold text-white text-xs shadow-md group-hover:scale-105 transition-transform">
+                    <span class="leading-none text-center font-title tracking-tighter">SIN<br><span class="text-[9px] text-sazon-gold">SAL</span></span>
+                </div>
+                <div>
+                    <span class="font-title text-2xl font-bold tracking-wider text-white group-hover:text-sazon-gold transition-colors block leading-none">Tu Sazón</span>
+                    <span class="text-[10px] uppercase tracking-widest text-wood-200 block mt-1 font-medium">El secreto de la buena cocina</span>
+                </div>
+            </a>
+
+            <!-- Menú Navegación Desktop -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#inicio" class="hover:text-sazon-gold transition-colors">Inicio</a>
+                <a href="#nosotros" class="hover:text-sazon-gold transition-colors">Nuestra Esencia</a>
+                <a href="#catalogo" class="hover:text-sazon-gold transition-colors">Sazonadores</a>
+                <a href="#beneficios" class="hover:text-sazon-gold transition-colors">100% Sin Sal</a>
+                <a href="#contacto" class="hover:text-sazon-gold transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Acciones / Pedido Rápido -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <a href="#catalogo" class="px-5 py-2.5 rounded-full bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-sm transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-pepper-hot">
+</i> Ver Catálogo
+                </a>
+            </div>
+
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden text-wood-100 hover:text-sazon-gold text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-wood-900 border-b border-wood-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="mobile-link block py-2 text-wood-100 hover:text-sazon-gold">Inicio</a>
+            <a href="#nosotros" class="mobile-link block py-2 text-wood-100 hover:text-sazon-gold">Nuestra Esencia</a>
+            <a href="#catalogo" class="mobile-link block py-2 text-wood-100 hover:text-sazon-gold">Sazonadores</a>
+            <a href="#beneficios" class="mobile-link block py-2 text-wood-100 hover:text-sazon-gold">100% Sin Sal</a>
+            <a href="#contacto" class="mobile-link block py-2 text-wood-100 hover:text-sazon-gold">Contacto</a>
+            <a href="#catalogo" class="mobile-link inline-block w-full text-center py-3 rounded-xl bg-sazon-gold text-wood-950 font-bold">Ver Catálogo</a>
+        </div>
+    </header>
+
+    <!-- HERO BANNER / SECCIÓN PRINCIPAL -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden wood-texture">
+        <!-- Overlay Gradiente -->
+        <div class="absolute inset-0 hero-overlay"></div>
+
+        <!-- Elementos Decorativos Flotantes de Especias -->
+        <div class="absolute top-1/4 left-5 opacity-20 text-6xl text-sazon-gold animate-pulse"><i class="fa-solid fa-leaf"></i></div>
+        <div class="absolute bottom-1/3 right-10 opacity-15 text-7xl text-sazon-red"><i class="fa-solid fa-pepper-hot"></i></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Columna Texto Hero -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    
+                    <!-- Badge Sin Sal -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sazon-red/20 border border-sazon-red/40 text-sazon-red font-semibold text-xs sm:text-sm tracking-wider uppercase">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <span>100% Sin Sal & Natural</span>
+                    </div>
+
+                    <h1 class="font-title text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+                        Tu Sazón
+                    </h1>
+                    
+                    <p class="font-title text-xl sm:text-2xl text-sazon-gold italic font-semibold">
+                        "El secreto de la buena cocina"
+                    </p>
+
+                    <p class="text-base sm:text-lg text-wood-200 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Mezclas artesanales de condimentos y hierbas de primera calidad, diseñadas para elevar el sabor natural de tus comidas sin añadir sodio ni preservantes artificiales.
+                    </p>
+
+                    <!-- Acciones Hero -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#catalogo" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-base transition-all transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-basket-shopping"></i> Explorar Sabores
+                        </a>
+                        <a href="https://wa.me/?text=Hola%2C%20quisiera%20pedir%20informaci%C3%B3n%20sobre%20las%20especias%20Tu%20Saz%C3%B3n" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card hover:bg-wood-800/80 text-white font-semibold text-base transition-all border border-wood-600/50 flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i> Hacer Pedido Directo
+                        </a>
+                    </div>
+
+                    <!-- Indicadores de Calidad -->
+                    <div class="pt-8 border-t border-wood-800/80 grid grid-cols-3 gap-4 text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <span class="block font-title text-2xl font-bold text-sazon-gold">0%</span>
+                            <span class="text-xs text-wood-200">Sodio / Sal</span>
+                        </div>
+                        <div>
+                            <span class="block font-title text-2xl font-bold text-sazon-gold">100%</span>
+                            <span class="text-xs text-wood-200">Artesanal</span>
+                        </div>
+                        <div>
+                            <span class="block font-title text-2xl font-bold text-sazon-gold">Premium</span>
+                            <span class="text-xs text-wood-200">Ingredientes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Etiqueta / Visual de Producto Destacado -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Resplandor Dorado de Fondo -->
+                        <div class="absolute inset-0 bg-sazon-gold/15 blur-3xl rounded-full"></div>
+                        
+                        <!-- Réplica Digital de la Etiqueta Oficial "Tu Sazón" -->
+                        <div class="relative label-shape bg-wood-900 overflow-hidden shadow-2xl p-6 sm:p-8 text-center text-wood-100 gold-border-glow" style="background-image: radial-gradient(circle, #3D2210 0%, #1A0E06 100%);">
+                            
+                            <!-- Sello Sin Sal en la Etiqueta -->
+                            <div class="absolute top-4 left-4 bg-sazon-red text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md border border-red-400 rotate-[-8deg] uppercase tracking-wider">
+                                <i class="fa-solid fa-leaf mr-1"></i> Sin Sal
+                            </div>
+
+                            <div class="mt-6 mb-4">
+                                <h2 class="font-title text-3xl sm:text-4xl font-extrabold text-white tracking-wide">Tu Sazón</h2>
+                                <div class="w-3/4 h-0.5 bg-sazon-gold mx-auto my-2 opacity-80"></div>
+                                <p class="font-title text-xs sm:text-sm text-sazon-gold italic">El secreto de la buena cocina</p>
+                            </div>
+
+                            <p class="text-xs text-wood-200 my-4 font-medium leading-relaxed">
+                                Combinación artesanal de especias puras para realzar el verdadero sabor de tus recetas familiares.
+                            </p>
+
+                            <!-- Ilustración de Vegetales e Ingredientes -->
+                            <div class="py-4 flex justify-center items-center gap-4 text-sazon-gold text-2xl opacity-90">
+                                <i class="fa-solid fa-wheat-awn" title="Especias"></i>
+                                <i class="fa-solid fa-pepper-hot" title="Pimentón y Ají"></i>
+                                <i class="fa-solid fa-seedling" title="Hierbas"></i>
+                            </div>
+
+                            <div class="border-t border-wood-800 pt-3">
+                                <span class="text-[11px] uppercase tracking-widest text-wood-200 block font-semibold">Ingredientes Naturales</span>
+                                <span class="text-[10px] text-sazon-gold block mt-0.5">El toque maestro para tus creaciones</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN NUESTRA ESENCIA / SOBRE LA MARCA -->
+    <section id="nosotros" class="py-20 bg-wood-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-6 rounded-2xl bg-wood-800/60 border border-wood-700/50 space-y-3">
+                            <i class="fa-solid fa-mortar-pestle text-3xl text-sazon-gold"></i>
+                            <h4 class="font-title text-lg font-bold text-white">Elaboración Artesanal</h4>
+                            <p class="text-xs text-wood-200">Molienda y selección cuidadosa de cada semilla, hoja y raíz.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-wood-800/60 border border-wood-700/50 space-y-3 mt-6">
+                            <i class="fa-solid fa-heart-pulse text-3xl text-sazon-red"></i>
+                            <h4 class="font-title text-lg font-bold text-white">Saludable & Puro</h4>
+                            <p class="text-xs text-wood-200">Ideal para quienes cuidan su presión o prefieren controlar el sodio.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-wood-800/60 border border-wood-700/50 space-y-3">
+                            <i class="fa-solid fa-utensils text-3xl text-sazon-green"></i>
+                            <h4 class="font-title text-lg font-bold text-white">Sabor Intenso</h4>
+                            <p class="text-xs text-wood-200">La dosis perfecta de aroma y presencia gastronómica.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-wood-800/60 border border-wood-700/50 space-y-3 mt-6">
+                            <i class="fa-solid fa-jar text-3xl text-sazon-gold"></i>
+                            <h4 class="font-title text-lg font-bold text-white">Empaque Hermético</h4>
+                            <p class="text-xs text-wood-200">Frascos diseñados para conservar la frescura intacta por meses.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="inline-block px-3 py-1 rounded-md bg-wood-800 border border-wood-700 text-sazon-gold font-semibold text-xs tracking-widest uppercase">
+                        Nuestra Propuesta
+                    </div>
+                    <h2 class="font-title text-3xl sm:text-4xl font-bold text-white leading-tight">
+                        Cocinamos con Pasión para transformar tus Platos
+                    </h2>
+                    <p class="text-wood-200 text-sm sm:text-base leading-relaxed">
+                        En <strong class="text-sazon-gold font-semibold">Tu Sazón</strong> creemos que la buena cocina no requiere excesos de sal ni saborizantes artificiales. Nuestro secreto reside en la armonía perfecta entre especias deshidratadas de alta calidad, seleccionadas especialmente para acentuar el aroma de tus guisos, carnes, ensaladas y preparaciones caseras.
+                    </p>
+                    <p class="text-wood-200 text-sm sm:text-base leading-relaxed">
+                        Cada frasco es empacado artesanalmente para llevar a tu mesa la frescura y la tradición de una cocina auténtica y saludable.
+                    </p>
+                    
+                    <div class="pt-4 flex items-center gap-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-sazon-green/20 flex items-center justify-center text-sazon-green text-xl">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-white">Sin Conservantes</h5>
+                                <span class="text-xs text-wood-200">100% especias puras</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-sazon-gold/20 flex items-center justify-center text-sazon-gold text-xl">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-white">Sin Glutamato</h5>
+                                <span class="text-xs text-wood-200">Libre de aditivos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUCTOS / MEZCLAS -->
+    <section id="catalogo" class="py-20 wood-texture relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-sazon-gold font-bold text-xs uppercase tracking-widest bg-wood-900/80 px-4 py-1.5 rounded-full border border-wood-700">
+                    Nuestras Presentaciones
+                </span>
+                <h2 class="font-title text-3xl sm:text-5xl font-extrabold text-white">Catálogo de Especias</h2>
+                <p class="text-wood-200 text-sm sm:text-base">
+                    Descubre nuestras combinaciones exclusivas preparadas para cada tipo de platillo. Todas 100% libres de sal.
+                </p>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Producto 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:border-sazon-gold transition-all duration-300 group flex flex-col justify-between">
+                    <div class="p-6 relative">
+                        <span class="absolute top-4 right-4 bg-sazon-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Sin Sal</span>
+                        
+                        <!-- Icono / Imagen del Frasco -->
+                        <div class="w-24 h-32 mx-auto my-4 bg-wood-900 border-2 border-sazon-gold/40 rounded-xl flex flex-col items-center justify-center relative shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-jar text-4xl text-sazon-gold"></i>
+                            <span class="text-[9px] font-title text-white font-bold mt-2">TU SAZÓN</span>
+                        </div>
+
+                        <h3 class="font-title text-xl font-bold text-white text-center mb-2">Toque Maestro</h3>
+                        <p class="text-xs text-sazon-gold text-center mb-4 font-medium">Uso General & Guisos</p>
+                        <p class="text-xs text-wood-200 leading-relaxed text-center">
+                            Nuestra mezcla insignia. Ajo pulverizado, cebolla, pimentón dulce, orégano y un toque de pimienta negra.
+                        </p>
+                    </div>
+
+                    <div class="p-6 pt-0 border-t border-wood-800/60 mt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-wood-200">Presentación:</span>
+                            <span class="text-xs font-bold text-white bg-wood-800 px-2 py-1 rounded">Frasco 100g</span>
+                        </div>
+                        <button onclick="pedirProducto('Toque Maestro (Guisos y Carnes)')" class="w-full py-2.5 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:border-sazon-gold transition-all duration-300 group flex flex-col justify-between">
+                    <div class="p-6 relative">
+                        <span class="absolute top-4 right-4 bg-sazon-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Sin Sal</span>
+                        
+                        <div class="w-24 h-32 mx-auto my-4 bg-wood-900 border-2 border-sazon-gold/40 rounded-xl flex flex-col items-center justify-center relative shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-fire-flame-curved text-4xl text-sazon-red"></i>
+                            <span class="text-[9px] font-title text-white font-bold mt-2">PARRILLERO</span>
+                        </div>
+
+                        <h3 class="font-title text-xl font-bold text-white text-center mb-2">Mezcla Parrillera</h3>
+                        <p class="text-xs text-sazon-gold text-center mb-4 font-medium">Para Carnes & Asados</p>
+                        <p class="text-xs text-wood-200 leading-relaxed text-center">
+                            Combinación intensa con romero, ajo ahumado, ají molido y pimienta roja para asados memorables.
+                        </p>
+                    </div>
+
+                    <div class="p-6 pt-0 border-t border-wood-800/60 mt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-wood-200">Presentación:</span>
+                            <span class="text-xs font-bold text-white bg-wood-800 px-2 py-1 rounded">Frasco 100g</span>
+                        </div>
+                        <button onclick="pedirProducto('Mezcla Parrillera')" class="w-full py-2.5 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:border-sazon-gold transition-all duration-300 group flex flex-col justify-between">
+                    <div class="p-6 relative">
+                        <span class="absolute top-4 right-4 bg-sazon-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Sin Sal</span>
+                        
+                        <div class="w-24 h-32 mx-auto my-4 bg-wood-900 border-2 border-sazon-gold/40 rounded-xl flex flex-col items-center justify-center relative shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-leaf text-4xl text-sazon-green"></i>
+                            <span class="text-[9px] font-title text-white font-bold mt-2">HIERBAS</span>
+                        </div>
+
+                        <h3 class="font-title text-xl font-bold text-white text-center mb-2">Hierbas Silvestres</h3>
+                        <p class="text-xs text-sazon-gold text-center mb-4 font-medium">Aves, Ensaladas & Pastas</p>
+                        <p class="text-xs text-wood-200 leading-relaxed text-center">
+                            Albahaca, tomillo, mejorana y perejil deshidratado. Frescura campestre en cada cucharada.
+                        </p>
+                    </div>
+
+                    <div class="p-6 pt-0 border-t border-wood-800/60 mt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-wood-200">Presentación:</span>
+                            <span class="text-xs font-bold text-white bg-wood-800 px-2 py-1 rounded">Frasco 80g</span>
+                        </div>
+                        <button onclick="pedirProducto('Hierbas Silvestres')" class="w-full py-2.5 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden hover:border-sazon-gold transition-all duration-300 group flex flex-col justify-between">
+                    <div class="p-6 relative">
+                        <span class="absolute top-4 right-4 bg-sazon-red text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Sin Sal</span>
+                        
+                        <div class="w-24 h-32 mx-auto my-4 bg-wood-900 border-2 border-sazon-gold/40 rounded-xl flex flex-col items-center justify-center relative shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-seedling text-4xl text-yellow-500"></i>
+                            <span class="text-[9px] font-title text-white font-bold mt-2">AJO & ESPECIAS</span>
+                        </div>
+
+                        <h3 class="font-title text-xl font-bold text-white text-center mb-2">Ajo & Especias</h3>
+                        <p class="text-xs text-sazon-gold text-center mb-4 font-medium">Pescados, Mariscos & Arroces</p>
+                        <p class="text-xs text-wood-200 leading-relaxed text-center">
+                            Ajo puro granulado mezclado con cúrcuma orgánica, comino y cilantro molido.
+                        </p>
+                    </div>
+
+                    <div class="p-6 pt-0 border-t border-wood-800/60 mt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-wood-200">Presentación:</span>
+                            <span class="text-xs font-bold text-white bg-wood-800 px-2 py-1 rounded">Frasco 100g</span>
+                        </div>
+                        <button onclick="pedirProducto('Ajo y Especias')" class="w-full py-2.5 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-xs transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE BENEFICIOS SALUDABLES -->
+    <section id="beneficios" class="py-16 bg-wood-900 border-y border-wood-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-sazon-darkGreen to-wood-900 rounded-3xl p-8 sm:p-12 border border-sazon-green/40 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 max-w-2xl text-center lg:text-left">
+                    <span class="text-xs font-bold uppercase tracking-widest text-sazon-gold bg-black/30 px-3 py-1 rounded-full">¿Por qué elegir Sin Sal?</span>
+                    <h3 class="font-title text-2xl sm:text-4xl font-bold text-white">Cocina con todo el sabor, cuidando de tu familia</h3>
+                    <p class="text-sm text-wood-100 leading-relaxed">
+                        Nuestras fórmulas eliminan la necesidad de añadir sal industrial, permitiéndote disfrutar de los verdaderos aceites esenciales de las especias. Ideal para regímenes de salud, deportistas o amantes del buen comer.
+                    </p>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="#contacto" class="px-8 py-4 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-sm shadow-xl transition-transform transform hover:scale-105 block text-center">
+                        Contactar para Pedidos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO Y PEDIDOS -->
+    <section id="contacto" class="py-20 bg-wood-950 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Información de Contacto -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-sazon-gold font-bold text-xs uppercase tracking-widest">Atención Directa</span>
+                        <h2 class="font-title text-3xl sm:text-4xl font-bold text-white mt-2">Haz tu Pedido</h2>
+                        <p class="text-wood-200 text-sm mt-3 leading-relaxed">
+                            Atendemos solicitudes al mayor y detal. Contáctanos para conocer disponibilidad, promociones especiales o solicitar envíos.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Correo Oficial -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-wood-900 border border-wood-800">
+                            <div class="w-12 h-12 rounded-lg bg-sazon-gold/10 flex items-center justify-center text-sazon-gold text-xl">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-wood-200 block">Correo Electrónico Oficial</span>
+                                <a href="mailto:tusazonsecreto@gmail.com" class="text-sm font-bold text-white hover:text-sazon-gold transition-colors">tusazonsecreto@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Atención WhatsApp -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-wood-900 border border-wood-800">
+                            <div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500 text-xl">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-wood-200 block">WhatsApp Directo</span>
+                                <span class="text-sm font-bold text-white">Pedidos e Informes</span>
+                            </div>
+                        </div>
+
+                        <!-- Garantía de Calidad -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl bg-wood-900 border border-wood-800">
+                            <div class="w-12 h-12 rounded-lg bg-sazon-red/10 flex items-center justify-center text-sazon-red text-xl">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-wood-200 block">Calidad Garantizada</span>
+                                <span class="text-sm font-bold text-white">Garantía Artesanal Tu Sazón</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Mensaje -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-8 rounded-3xl relative">
+                        <h3 class="font-title text-xl font-bold text-white mb-6">Envíanos un Mensaje</h3>
+                        
+                        <form id="contact-form" onsubmit="enviarFormulario(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-wood-200 mb-1">Tu Nombre</label>
+                                    <input type="text" required placeholder="Ej. María Pérez" class="w-full px-4 py-3 rounded-xl bg-wood-900/90 border border-wood-700 text-white placeholder-wood-600 focus:outline-none focus:border-sazon-gold text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-wood-200 mb-1">Teléfono / WhatsApp</label>
+                                    <input type="tel" required placeholder="Ej. +58 412 1234567" class="w-full px-4 py-3 rounded-xl bg-wood-900/90 border border-wood-700 text-white placeholder-wood-600 focus:outline-none focus:border-sazon-gold text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-wood-200 mb-1">Producto de Interés</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-wood-900/90 border border-wood-700 text-white focus:outline-none focus:border-sazon-gold text-sm">
+                                    <option value="Todos los sazonadores">Todas las mezclas / Combo</option>
+                                    <option value="Toque Maestro">Toque Maestro (Guisos)</option>
+                                    <option value="Mezcla Parrillera">Mezcla Parrillera</option>
+                                    <option value="Hierbas Silvestres">Hierbas Silvestres</option>
+                                    <option value="Ajo y Especias">Ajo & Especias</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-wood-200 mb-1">Mensaje o Detalle del Pedido</label>
+                                <textarea rows="4" required placeholder="¿Cuántas unidades necesitas o qué dudas tienes?" class="w-full px-4 py-3 rounded-xl bg-wood-900/90 border border-wood-700 text-white placeholder-wood-600 focus:outline-none focus:border-sazon-gold text-sm"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-sazon-gold hover:bg-sazon-goldHover text-wood-950 font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar Consulta
+                            </button>
+                        </form>
+
+                        <!-- Notificación de Envío Exitoso -->
+                        <div id="form-success" class="hidden mt-4 p-4 rounded-xl bg-sazon-green/30 border border-sazon-green text-green-200 text-xs text-center">
+                            ¡Gracias por escribirnos! Se abrirá la opción para remitir tu pedido o puedes escribirnos directo a <strong>tusazonsecreto@gmail.com</strong>.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA / FOOTER -->
+    <footer class="bg-wood-950 border-t border-wood-800/80 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-t-lg bg-sazon-red border border-black flex items-center justify-center font-bold text-white text-[9px]">
+                        SIN SAL
+                    </div>
+                    <div>
+                        <span class="font-title text-xl font-bold text-white block leading-none">Tu Sazón</span>
+                        <span class="text-[10px] text-sazon-gold italic">El secreto de la buena cocina</span>
+                    </div>
+                </div>
+
+                <div class="text-xs text-wood-200 text-center md:text-right space-y-1">
+                    <p>&copy; 2026 <strong>Tu Sazón</strong>. Todos los derechos reservados.</p>
+                    <p class="text-wood-600">Contacto: <a href="mailto:tusazonsecreto@gmail.com" class="hover:underline text-wood-200">tusazonsecreto@gmail.com</a></p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        // Control Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Función para pedido específico vía WhatsApp
+        function pedirProducto(nombreProducto) {
+            const mensaje = encodeURIComponent(`¡Hola Tu Sazón! Me interesa consultar disponibilidad del producto: ${nombreProducto}.`);
+            window.open(`https://wa.me/?text=${mensaje}`, '_blank');
+        }
+
+        // Simulación envío de formulario con respaldo por Email
+        function enviarFormulario(event) {
+            event.preventDefault();
+            const successBox = document.getElementById('form-success');
+            successBox.classList.remove('hidden');
+
+            setTimeout(() => {
+                const mailtoLink = `mailto:tusazonsecreto@gmail.com?subject=Consulta%20de%20Pedido%20Tu%20Saz%C3%B3n`;
+                window.location.href = mailtoLink;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
